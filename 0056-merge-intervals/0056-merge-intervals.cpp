@@ -12,16 +12,9 @@ public:
         for(int i=1; i<n; i++){
             
             if(intrv[i][0] >= l && intrv[i][0] <= r){
-                if(intrv[i][1] >= r){
+                if(intrv[i][1] >= r)
                     r=intrv[i][1];
-                }
             }
-            // else if(intrv[i][0] < l){
-            //     l=intrv[i][0];
-            //     if(intrv[i][1] >= r){
-            //         r=intrv[i][1];
-            //     }
-            // }
             else{
                 vector<int>a={l,r};
                 ans.push_back(a);
