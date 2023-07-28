@@ -3,21 +3,24 @@ public:
     int trap(vector<int>& height) {
         int s=height.size();
         int water=0;
-        vector<int>rightmax(s), leftmax(s);
+        int left=0, right=s-1, leftmax=0, rightmax=0;
 
-        rightmax[s-1]=height[s-1];
-        for(int i=s-2; i>=0; i--){
-            rightmax[i]=max(height[i],rightmax[i+1]);
+        while(left <= right){
+            if(height[left] <= height[right]){
+                if(height[left] >= leftmax)
+                    leftmax=height[left];
+                else
+                    water+=leftmax-height[left];
+                left++;
+            }
+            else{
+                if(height[right] >= rightmax)
+                    rightmax=height[right];
+                else
+                    water+=rightmax-height[right];
+                right--;
+            }
         }
-        leftmax[0]=height[0];
-        for(int i=1; i<s; i++){
-            leftmax[i]=max(height[i],leftmax[i-1]);
-        }
-
-        for(int i=0; i<s; i++){
-            water+=min(leftmax[i], rightmax[i])-height[i];
-        }
-
         return water;
     }
 };
